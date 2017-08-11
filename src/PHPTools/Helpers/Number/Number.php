@@ -39,11 +39,6 @@ class Number
     private $decimal;
 
     /**
-     * @var float
-     */
-    private $decimal;
-
-    /**
      * @var array
      */
     private $localePoint;
