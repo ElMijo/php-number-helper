@@ -246,16 +246,16 @@ class Number
         foreach ($args as $arg) {
             switch ($operation) {
                 case '+':
-                    $this->value+= $this->arg($arg)->float();
+                    $this->value += $this->arg($arg)->float();
                     break;
                 case '-':
-                    $this->value-= $this->arg($arg)->float();
+                    $this->value -= $this->arg($arg)->float();
                     break;
                 case '*':
-                    $this->value*= $this->arg($arg)->float();
+                    $this->value *= $this->arg($arg)->float();
                     break;
                 case '/':
-                    $this->value/= $this->arg($arg)->float();
+                    $this->value /= $this->arg($arg)->float();
                     break;
             }
         }
@@ -286,7 +286,7 @@ class Number
     {
         return file(
             realpath(__DIR__."/data/$filename.txt"),
-            FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES
+            FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES
         );
     }
 
