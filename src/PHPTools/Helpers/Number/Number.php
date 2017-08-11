@@ -19,11 +19,46 @@ class Number
     const DEFAULT_LOCALE = 'en';
 
     /**
+     * @var string
+     */
+    private $raw;
+
+    /**
+     * @var string
+     */
+    private $locale;
+
+    /**
+     * @var string
+     */
+    private $thousands;
+
+    /**
+     * @var string
+     */
+    private $decimal;
+
+    /**
+     * @var float
+     */
+    private $decimal;
+
+    /**
+     * @var array
+     */
+    private $localePoint;
+
+    /**
+     * @var array
+     */
+    private $localeComma;
+
+    /**
      * The __construct
      * @param string|int|float $raw the numeric value to process
      * @param string $locale The original locale of the $raw value.
      */
-    function __construct($raw, $locale = self::DEFAULT_LOCALE)
+    public function __construct($raw, $locale = self::DEFAULT_LOCALE)
     {
         if (!in_array(gettype($raw), ['string', 'integer', 'double'])) {
             throw new \InvalidArgumentException(sprintf(
@@ -40,13 +75,14 @@ class Number
 
     /**
      * Set locale of the value.
-     * @param $this
+     * @param string $locale
+     * @return $this
      */
     public function setLocale($locale)
     {
         $this->locale = $this->isValidLocale($locale)
-            ?$locale
-            :static::DEFAULT_LOCALE
+            ? $locale
+            : static::DEFAULT_LOCALE
         ;
 
         list(
@@ -184,7 +220,7 @@ class Number
     /**
      * Allows to obtain the format by locale
      * @param  string $locale
-     * @return string
+     * @return string[]
      */
     private function getFormatByLocale($locale)
     {
@@ -214,10 +250,18 @@ class Number
     {
         foreach ($args as $arg) {
             switch ($operation) {
-                case '+':$this->value+= $this->arg($arg)->float();break;
-                case '-':$this->value-= $this->arg($arg)->float();break;
-                case '*':$this->value*= $this->arg($arg)->float();break;
-                case '/':$this->value/= $this->arg($arg)->float();break;
+                case '+':
+                    $this->value+= $this->arg($arg)->float();
+                    break;
+                case '-':
+                    $this->value-= $this->arg($arg)->float();
+                    break;
+                case '*':
+                    $this->value*= $this->arg($arg)->float();
+                    break;
+                case '/':
+                    $this->value/= $this->arg($arg)->float();
+                    break;
             }
         }
         return $this;
